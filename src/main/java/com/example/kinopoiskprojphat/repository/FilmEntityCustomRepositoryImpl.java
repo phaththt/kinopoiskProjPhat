@@ -60,18 +60,18 @@ public class FilmEntityCustomRepositoryImpl {
         }
 
         if(Objects.nonNull(filmDTO.getYear())){
-            predicates.add(criteriaBuilder.like(filmEntityroot.get("year"),
-                    "%" + filmDTO.getYear() + "%"));
+            predicates.add(criteriaBuilder.equal(filmEntityroot.get("year"),
+                    filmDTO.getYear()));
         }
 
         if(Objects.nonNull(filmDTO.getKinopoiskId())){
-            predicates.add(criteriaBuilder.like(filmEntityroot.get("kinopoiskId"),
-                    "%" + filmDTO.getKinopoiskId() + "%"));
+            predicates.add(criteriaBuilder.equal(filmEntityroot.get("kinopoiskId"),
+                    filmDTO.getKinopoiskId()));
         }
 
         if(Objects.nonNull(filmDTO.getRatingKinopoisk())){
-            predicates.add(criteriaBuilder.like(filmEntityroot.get("ratingKinopoisk"),
-                    "%" + filmDTO.getRatingKinopoisk() + "%"));
+            predicates.add(criteriaBuilder.equal(filmEntityroot.get("ratingKinopoisk"),
+                    filmDTO.getRatingKinopoisk()));
         }
 
         if(Objects.nonNull(filmDTO.getDescription())){
