@@ -11,7 +11,7 @@ public class FilmDTO {
 
     private String nameRu;
 
-    private Integer year;
+    private Long year;
 
     private Long kinopoiskId;
 

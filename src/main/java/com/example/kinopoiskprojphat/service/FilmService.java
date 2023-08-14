@@ -1,21 +1,21 @@
 package com.example.kinopoiskprojphat.service;
 
 import com.example.kinopoiskprojphat.mapper.FilmMapper;
+import com.example.kinopoiskprojphat.model.FilmDTO;
 import com.example.kinopoiskprojphat.model.FilmEntity;
 import com.example.kinopoiskprojphat.model.FilmFilterDTO;
-import com.example.kinopoiskprojphat.model.FilmFilterDataBaseDTO;
+import com.example.kinopoiskprojphat.model.FilmFilterPage;
+import com.example.kinopoiskprojphat.repository.FilmEntityCustomRepository;
+import com.example.kinopoiskprojphat.repository.FilmEntityCustomRepositoryImpl;
 import com.example.kinopoiskprojphat.repository.FilmRepository;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +28,11 @@ public class FilmService {
     private final FilmMapper filmMapper;
 
     private final ClientKinopoisk clientKinopoisk;
+
+    private final FilmEntityCustomRepository filmEntityCustomRepository;
+    private final FilmEntityCustomRepositoryImpl filmEntityCustomRepositoryImpl;
+
+    private ObjectMapper objectMapper;
 
 
     @PersistenceContext
@@ -53,9 +58,13 @@ public class FilmService {
 
     }
 
+    public Page<FilmEntity> getFilmEntityPage(FilmFilterPage filmFilterPage, FilmDTO filmDTO){
 
-    public Page<FilmEntity> findAll(PageRequest pageRequest){
-        return filmRepository.findAll(pageRequest);
+        return filmEntityCustomRepositoryImpl.findAllFilters(filmFilterPage, filmDTO);
+    }
 
+    public FilmEntity addFilmEntity(FilmEntity filmEntity){
+
+        return filmEntityCustomRepository.save(filmEntity);
     }
 }
