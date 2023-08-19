@@ -25,14 +25,12 @@ public class FilmService {
 
     private final FilmRepository filmRepository;
 
-    private final FilmMapper filmMapper;
-
     private final ClientKinopoisk clientKinopoisk;
 
-    private final FilmEntityCustomRepository filmEntityCustomRepository;
     private final FilmEntityCustomRepositoryImpl filmEntityCustomRepositoryImpl;
-
     private ObjectMapper objectMapper;
+
+
 
 
     @PersistenceContext
@@ -51,11 +49,15 @@ public class FilmService {
 
 
     public List<FilmEntity> saveFilms(FilmFilterDTO filterDTO) {
-        return clientKinopoisk.getFilm(filterDTO)
-                .stream()
-                .peek(this::addFilms)
-                .collect(Collectors.toList());
+        if (filterDTO == null) {
+            return null;
+        } else {
+            return clientKinopoisk.getFilm(filterDTO)
+                    .stream()
+                    .peek(this::addFilms)
+                    .collect(Collectors.toList());
 
+        }
     }
 
     public Page<FilmEntity> getFilmEntityPage(FilmFilterPage filmFilterPage, FilmDTO filmDTO){
@@ -63,8 +65,4 @@ public class FilmService {
         return filmEntityCustomRepositoryImpl.findAllFilters(filmFilterPage, filmDTO);
     }
 
-    public FilmEntity addFilmEntity(FilmEntity filmEntity){
-
-        return filmEntityCustomRepository.save(filmEntity);
-    }
 }

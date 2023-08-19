@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 @EnableJpaRepositories
 public interface FilmRepository extends JpaRepository<FilmEntity, Long>{
-     //   PagingAndSortingRepository<FilmEntity, Long> {
+
     boolean existsByKinopoiskId(Long kinopoiskId);
 
     List<FilmEntity> findAll(Specification<FilmEntity> spec, Pageable pageable);

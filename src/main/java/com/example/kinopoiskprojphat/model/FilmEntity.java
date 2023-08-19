@@ -20,7 +20,7 @@ public class FilmEntity {
     @Column(name = "film_name")
     private String nameRu;
     @Column(name = "year")
-    private Long year;
+    private Integer year;
     @Column(name = "film_id")
     private Long kinopoiskId;
     @Column(name = "rating")

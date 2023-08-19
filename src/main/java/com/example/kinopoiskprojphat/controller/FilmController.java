@@ -8,16 +8,11 @@ import com.example.kinopoiskprojphat.model.FilmFilterDTO;
 import com.example.kinopoiskprojphat.model.FilmFilterPage;
 import com.example.kinopoiskprojphat.repository.FilmRepository;
 import com.example.kinopoiskprojphat.service.FilmService;
-
-import static java.util.Arrays.stream;
-
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -46,21 +41,6 @@ public class FilmController {
                 .map(filmMapper::toFilmDTO)
                 .collect(Collectors.toList());
     }
-
-//    @GetMapping("api/films/{year}")
-//    public List<FilmEntity> findAllByRsql(@RequestParam(required = false)Long kinopoiskId,
-//                                          @RequestParam(required = false)String description,
-//                                          @PathVariable(required = false)Integer year,
-//                                          @RequestParam(required = false)Double ratingKinopoisk,
-//                                          @RequestParam(required = false)String nameRu
-//    ) {
-//        Specification<FilmEntity> specification = where(FilmEntitySpecification.hasKinopoiskId(kinopoiskId))
-//                .and(FilmEntitySpecification.hasDescription(description))
-//                .and(FilmEntitySpecification.hasYear(year))
-//                .and(FilmEntitySpecification.hasRating(ratingKinopoisk))
-//                .and(FilmEntitySpecification.hasNameRu(nameRu));
-//
-//        return filmRepository.findAll(specification);
 
     @GetMapping("/db")
     public ResponseEntity<Page<FilmEntity>> search(FilmFilterPage filmFilterPage,
