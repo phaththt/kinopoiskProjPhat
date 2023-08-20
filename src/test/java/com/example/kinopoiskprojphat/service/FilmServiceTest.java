@@ -82,7 +82,7 @@ public class FilmServiceTest {
 
 
         verify(clientKinopoisk).getFilm(filterDTO);
-        verify(filmRepository, times(mockFilms.size())).save(any(FilmEntity.class)); // Убеждаемся, что метод save вызывается для каждого мок-фильма
+        verify(filmRepository, times(mockFilms.size())).save(any(FilmEntity.class));
 
     }
 
@@ -158,9 +158,9 @@ public class FilmServiceTest {
 
         }
 
-        // Проверка
+
         verify(clientKinopoisk).getFilm(filterDTO);
-        assertEquals(mockFilms, result); 
+        assertEquals(mockFilms, result);
     }
 
 
